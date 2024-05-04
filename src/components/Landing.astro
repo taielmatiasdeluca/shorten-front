@@ -1,0 +1,48 @@
+---
+import Header from "./Header.astro";
+---
+
+<section class="min-h-screen">
+    <main class="block md:flex h-full items-center">
+        <div class="h-full mt-20 flex align-middle flex-col p-16 w-4/6">
+            <p id="hero_text" class="text-5xl font-bold text-white">
+                SHORTEN el acortador de links mas rapido, adaptable y gratuito. <br
+                />
+                ! La complejidad crece con tus necesidades ¡
+            </p>
+            <div class="mt-5 flex w-full gap-8 text-2xl">
+                <input
+                    type="text"
+                    class="p-2 bg-white grow rounded-2xl"
+                    placeholder="Ingrese su link"
+                />
+                <button class="p-2 px-4 text-white font-bold rounded-2xl">
+                    Generar
+                </button>
+            </div>
+        </div>
+        <div class="flex grow max-h-full p-16">
+            <img src="/img/main_ilustration.svg" class="w-auto h-full" alt="" />
+        </div>
+    </main>
+</section>
+
+<style>
+    section {
+        background-image: url("/img/bg_main.svg");
+    }
+    button {
+        background-color: #0d1321;
+        font-family: "League Spartan Variable";
+    }
+    input {
+        opacity: 85%;
+    }
+    button:focus,
+    input:focus {
+        outline: 2px solid #0d1321;
+    }
+    #hero_text {
+        text-shadow: 5px 5px 7px rgba(62, 62, 62, 0.44);
+    }
+</style>
