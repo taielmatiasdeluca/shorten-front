@@ -3,7 +3,43 @@ import Burger from "./icons/Burger.astro";
 ---
 
 <header class="flex absolute justify-between p-10">
-    <span class="text-xl">
-        <Burger color="white" width='40"' height="40" />
-    </span>
+    <div class="relative text-xl">
+        <span id="burger_icon" class="text-xl">
+            <Burger color="white" width='40"' height="40" />
+        </span>
+        <ul
+            id="menu_parent"
+            class="opacity-0 absolute overflow-hidden top-12 left-3 flex flex-col w-max rounded-lg bg-white"
+        >
+            <a
+                href="/login"
+                class="px-4 w-56 py-2 flex justify-start hover:bg-gray-300"
+            >
+                Iniciar Sesion
+            </a>
+            <a
+                href="/register"
+                class="px-4 w-56 py-2 flex justify-start hover:bg-gray-300"
+            >
+                Registrarse
+            </a>
+            <a
+                href="/contact"
+                class="px-4 w-56 py-2 flex justify-start hover:bg-gray-300"
+            >
+                Contacto
+            </a>
+        </ul>
+    </div>
 </header>
+
+<script>
+    const burger = document.getElementById("burger_icon");
+    const list = document.getElementById("menu_parent");
+
+    burger?.addEventListener("click", (e) => {
+        list?.classList.toggle("opacity-0");
+    });
+</script>
+
+<style></style>

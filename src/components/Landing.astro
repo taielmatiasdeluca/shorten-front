@@ -1,10 +1,37 @@
 ---
 import Header from "./Header.astro";
+import Modal from "./Modal.astro";
+import Copy from "./icons/Copy.astro";
 ---
 
 <section class="min-h-screen">
+    <Modal title="Link Creado" id="modal__link">
+        <div class="flex rounded-xl overflow-hidden">
+            <input
+                type="url"
+                disabled
+                id="url__generated"
+                class="bg-slate-200 w-full p-1 text-2xl px-2 text-black"
+                value="https://shorten.taiel.dev/jldjl"
+            />
+            <button
+                class="min-w-32 px-3 text-white text-2xl flex items-center gap-1 cursor-pointer hover:opacity-85"
+                id="copy__button"
+            >
+                <Copy color=" white" height="20px" />
+                Copiar
+            </button>
+        </div>
+        <p>
+            Este link podria ser personalizado, solo debe
+            <a href="./register" class="underline hover:opacity-60">
+                crear una cuenta
+            </a>
+        </p>
+    </Modal>
+
     <main class="block md:flex h-full items-center">
-        <div class="h-full mt-20 flex align-middle flex-col p-16 w-4/6">
+        <div class="h-full flex align-middle flex-col p-16 w-4/6">
             <p id="hero_text" class="text-5xl font-bold text-white">
                 SHORTEN el acortador de links mas rapido, adaptable y gratuito. <br
                 />
@@ -12,11 +39,15 @@ import Header from "./Header.astro";
             </p>
             <div class="mt-5 flex w-full gap-8 text-2xl">
                 <input
-                    type="text"
+                    type="url"
+                    id="url_link"
                     class="p-2 bg-white grow rounded-2xl"
-                    placeholder="Ingrese su link"
+                    placeholder="Link a acotar..."
                 />
-                <button class="p-2 px-4 text-white font-bold rounded-2xl">
+                <button
+                    id="generate_button"
+                    class="p-2 px-4 text-white font-bold rounded-2xl focus:outline-none"
+                >
                     Generar
                 </button>
             </div>
@@ -26,6 +57,34 @@ import Header from "./Header.astro";
         </div>
     </main>
 </section>
+
+<script>
+    const $ = (id) => document.getElementById(id);
+
+    //Elements
+    const button = $("generate_button");
+    const input = $("url_link");
+    const modal = $("modal__link");
+    const copy = $("copy__button");
+    const inputGen = $("url__generated");
+
+    copy?.addEventListener("click", async (e) => {
+        try {
+            await navigator.clipboard.writeText(inputGen.value);
+            console.log("Contenido copiado al portapapeles");
+        } catch (err) {
+            console.error("Error al copiar: ", err);
+        }
+    });
+
+    button?.addEventListener("click", (e) => {
+        const url = input.value;
+        generateLink(url);
+        modal?.classList.toggle("opacity-0");
+    });
+
+    function generateLink() {}
+</script>
 
 <style>
     section {

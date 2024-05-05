@@ -1,0 +1,38 @@
+---
+import Close from "./icons/Close.astro";
+
+const { title, id } = Astro.props;
+---
+
+<div
+    id={id}
+    modal-main-element
+    class=` modal fixed left-0 right-0 ml-auto mr-auto top-10 left-10 w-1/2 flex w-1/2 rounded-lg overflow-hidden
+     bg-white flex flex-col p-4 opacity-0`
+>
+    <header class="flex mb-3 justify-between items-center">
+        <span class="text-2xl">
+            {title}
+        </span>
+        <span id="close_button" class="hover:opacity-50">
+            <Close color="black" width="25px" />
+        </span>
+    </header>
+    <div>
+        <slot />
+    </div>
+</div>
+
+<script>
+    const button = document.getElementById("close_button");
+    const modal = document.querySelector("div[modal-main-element]");
+    button?.addEventListener("click", (e) => {
+        modal?.classList.toggle("opacity-0");
+    });
+</script>
+
+<style>
+    .modal {
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
+</style>
