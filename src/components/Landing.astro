@@ -1,10 +1,14 @@
 ---
 import Header from "./Header.astro";
 import Modal from "./Modal.astro";
+import Toast from "./Toast.astro";
 import Copy from "./icons/Copy.astro";
 ---
 
 <section class="min-h-screen">
+    <Toast type="success" id="link_copied" >
+        Link copiado con exito
+    </Toast>
     <Modal title="Link Creado" id="modal__link">
         <div class="flex rounded-xl overflow-hidden">
             <input
@@ -67,11 +71,20 @@ import Copy from "./icons/Copy.astro";
     const modal = $("modal__link");
     const copy = $("copy__button");
     const inputGen = $("url__generated");
+    const linkCopyToast = $("link_copied");
+
 
     copy?.addEventListener("click", async (e) => {
         try {
             await navigator.clipboard.writeText(inputGen.value);
-            console.log("Contenido copiado al portapapeles");
+            linkCopyToast?.classList.remove('hidden');
+            //Hide after 5 seconds
+            setTimeout(()=>{
+                linkCopyToast?.classList.add('hidden');
+            },3000)
+            
+            
+
         } catch (err) {
             console.error("Error al copiar: ", err);
         }
